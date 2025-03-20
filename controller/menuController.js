@@ -42,13 +42,10 @@ exports.addMenuController = async (req, res) => {
 //   get all menu items
 
 exports.getAllMenuController = async (req, res) => {
-  try {
-    console.log("🔥 API Called: get-all-menus");  // Log when API is hit
-    const menuItems = await Menu.find();  // Fetch from MongoDB
-    console.log("✅ Fetched Menu Items:", menuItems);  // Log fetched data
-    res.status(200).json(menuItems);
-} catch (error) {
-    console.error("❌ Backend Error in get-all-menus:", error);  // Log error details
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
-}
+    try {
+        const result = await Menu.find();
+        return res.status(200).json(result)
+    } catch (err) {
+        return res.status(500).json(err)
+    }
 }
